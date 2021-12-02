@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_general_journal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
+        android:clickable="true"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/check_all_img"
+            android:layout_width="74dp"
+            android:layout_height="58dp"
+            android:src="@drawable/choose_all_img"
+            android:layout_gravity="start|bottom"
+            android:paddingStart="-5dp"
+            android:layout_marginBottom="-5dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <TextView
+                android:id="@+id/day_to_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day"
+                android:textSize="25sp"
+                android:layout_margin="20dp"
+                android:textColor="@color/text_color"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/missed_rectangle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/missed_call_rectangle"
+                android:layout_alignParentEnd="true"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/missed_call_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="Пропущенный"
+                android:textSize="9sp"
+                android:textColor="@color/red"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="13dp"
+                android:layout_marginTop="2dp"
+                android:visibility="invisible"/>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/icon_journal"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/day_to_day"
+                android:src="@drawable/ic_baseline_person_24"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/profile_icon"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="visible"
+                android:layout_marginTop="10dp"/>
+
+
+            <TextView
+                android:id="@+id/name_journal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                android:layout_toRightOf="@+id/icon_journal"
+                android:layout_below="@+id/day_to_day"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto"
+                android:layout_marginTop="10dp"/>
+
+            <ImageView
+                android:id="@+id/arrow_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_journal"
+                android:layout_toRightOf="@+id/icon_journal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/arrow_down"
+                android:tintMode="multiply"/>
+
+            <TextView
+                android:id="@+id/call_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_journal"
+                android:layout_toRightOf="@+id/arrow_call"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="10dp"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto"
+                android:text="Мобильный"
+                android:textColor="@color/profile_icon"/>
+
+            <TextView
+                android:id="@+id/call_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_journal"
+                android:layout_toRightOf="@+id/call_type"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="10dp"
+                android:textSize="12sp"
+                android:text="00:00"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/profile_icon"/>
+
+            <Button
+                android:id="@+id/play_record_journal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/name_journal"
+                android:layout_toRightOf="@+id/call_time"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_play"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/phone_journal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/name_journal"
+                android:layout_toRightOf="@+id/play_record_journal"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/ic_phone"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_recorded_journal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="-20dp"
+        android:layout_below="@+id/card_general_journal"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/icons_range_recorded"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/block_number_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/block_recorded"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_block"
+                    android:layout_marginTop="10dp"/>
+
+
+                <TextView
+                    android:id="@+id/block_text_recorded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/text_color"
+                    android:text="Блокировать"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/white_list_recorded"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/white_list"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/white_text_recorded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/text_color"
+                    android:text="В белом \nсписке"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/send_sms_btn_journal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/send_recorded"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/send"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/send_text_recorded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:textColor="@color/text_color"
+                    android:text="Послать\n текст"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/more_info_btn_journal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/more_info_recorded"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/more"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/more_text_recorded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:textSize="12sp"
+                    android:text="Больше \nинформации"
+                    android:textAlignment="center"
+                    android:gravity="center_vertical|center_horizontal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card_recorded_journal"
+        android:layout_marginTop="-45dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="@color/upper_buttons"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="70dp">
+
+                    <space.siy.waveformview.WaveFormView
+                        android:id="@+id/waveFormView"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:blockColor="@color/black"
+                        app:blockColorPlayed="@color/grey"
+                        app:showTimeText="true"
+                        app:textColor="@color/text_color"
+                        app:textBgColor="@color/upper_buttons"
+                        app:blockWidth="12"
+                        app:topBlockScale="2"
+                        app:bottomBlockScale="2"
+                        app:peakMode="peakmode_max"
+                        app:secPerBlock="0.1"/>
+
+<!--                    <ProgressBar-->
+<!--                        android:id="@+id/progressBarWave"-->
+<!--                        style="?android:attr/progressBarStyleHorizontal"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginLeft="30dp"-->
+<!--                        android:layout_marginRight="30dp"-->
+<!--                        android:max="1000"-->
+<!--                        android:min="0" />-->
+
+                </FrameLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_5_minus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/buttons_journal"
+                        android:text="-5 секунд"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/roboto_medium"
+                        app:backgroundTint="@color/toolbar_background"
+                        app:icon="@drawable/minus5"
+                        app:iconGravity="textStart" />
+
+                    <Button
+                        android:id="@+id/btn_pause"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/buttons_journal"
+                        app:backgroundTint="@color/toolbar_background"
+                        app:icon="@drawable/pause"
+                        app:iconGravity="textStart"
+                        android:text="Пауза"
+                        android:textSize="10sp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <Button
+                        android:id="@+id/btn_5_plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/buttons_journal"
+                        app:backgroundTint="@color/toolbar_background"
+                        app:icon="@drawable/plus5"
+                        app:iconGravity="textStart"
+                        android:text="+5 секунд"
+                        android:textSize="10sp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/play_view_btns_journal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/playerView"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/share_btn_journal"
+            android:layout_width="106dp"
+            android:layout_height="38dp"
+            android:src="@drawable/share"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/play_btn_journal"
+            android:layout_width="125dp"
+            android:layout_height="38dp"
+            android:src="@drawable/play_btn"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/delete_btn_journal"
+            android:layout_width="105dp"
+            android:layout_height="38dp"
+            android:src="@drawable/delete_btn"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

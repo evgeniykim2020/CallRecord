@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smth_light"
+    tools:context=".activities.CallerDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/upper_block_caller_details"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/toolbar_background"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_btn_caller_details"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/back_arrow333" />
+
+        <TextView
+            android:id="@+id/back_text_caller_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Назад"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mid_block_caller_details"
+        android:layout_width="match_parent"
+        android:layout_height="266dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upper_block_caller_details">
+
+        <TextView
+            android:id="@+id/text_full_journal_for_caller_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Полный журнал для"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/block_icon_name_caller_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_full_journal_for_caller_details">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_caller_details"
+                android:layout_width="53dp"
+                android:layout_height="53dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                app:civ_circle_background_color="@color/white" />
+
+            <TextView
+                android:id="@+id/name_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/roboto"
+                android:text="Имя"
+                android:textColor="@color/white"
+                android:textSize="21dp" />
+
+            <TextView
+                android:id="@+id/second_name_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto"
+                android:text="Фамилия"
+                android:textColor="@color/white"
+                android:textSize="21dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block_buttons_caller_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_icon_name_caller_details">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_button_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Редактировать"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:theme="@style/MyButton"
+                app:backgroundTint="@color/upper_buttons"
+                app:cornerRadius="25dp"
+                app:icon="@drawable/pen_caller_details"
+                app:iconSize="14dp"
+                app:iconTint="@color/black"
+                app:rippleColor="@color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/watch_button_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="См. контакт"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:theme="@style/MyButton"
+                app:backgroundTint="@color/upper_buttons"
+                app:cornerRadius="25dp"
+                app:icon="@drawable/watch_contact_caller_details"
+                app:iconSize="14dp"
+                app:iconTint="@color/black"
+                app:rippleColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block_many_buttons_caller_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/block_buttons_caller_details">
+
+            <LinearLayout
+                android:id="@+id/btn_block_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_block" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Блокировать"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_white_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/white_list" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="В белом \nсписке"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_send_text_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/send" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Послать \nтекст"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_call_caller_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/ic_phone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Вызов"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_caller_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mid_block_caller_details"
+        tools:listitem="@layout/caller_details_items" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

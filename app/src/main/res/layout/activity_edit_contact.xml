@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/smth_light"
+    tools:context=".activities.EditContactActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/upper_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/toolbar_background"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_btn_caller_details_edit"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/back_arrow333" />
+
+            <TextView
+                android:id="@+id/back_text_caller_details_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Редактировать контакт"
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mid_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:background="@color/dark_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upper_block_caller_details_edit">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_caller_details_edit"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                app:civ_circle_background_color="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/choose_icon_btn_caller_details_edit"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="-30dp"
+                android:src="@drawable/choose_icon_btn_caller_details"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_caller_details_edit"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/names_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="10dp"
+            android:theme="@style/MyButton"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mid_block_caller_details_edit">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Имя"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_name_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Имя"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Фамилия"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_surname_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Фамилия"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Отчество"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_father_name_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Отчество"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/nickname_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:theme="@style/MyButton"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/names_block_caller_details_edit">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/nickname_icon_caller_details_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Имя"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_nickname_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="Никнейм"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/phone_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:theme="@style/MyButton"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nickname_block_caller_details_edit">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/phone_icon_caller_details_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Номер телефона"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_phone_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="+79160000000"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/delete_phone_no_caller_details_edit"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/delete_btn_phone_caller_details_edit" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/email_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:theme="@style/MyButton"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_block_caller_details_edit">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/email_caller_details_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Электронная почта"
+                    android:textColor="@color/light_grey"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_email_caller_details_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="mail@mail.mail"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/delete_email_no_caller_details_edit"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/delete_btn_phone_caller_details_edit" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cancel_save_btns_block_caller_details_edit"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_block_caller_details_edit">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_btn_caller_details_edit"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Отмена"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:theme="@style/MyButton"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="25dp"
+                app:icon="@drawable/delete_btn_phone_caller_details_edit"
+                app:iconGravity="textStart"
+                app:iconSize="10dp"
+                app:iconTint="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Сохранить"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:theme="@style/MyButton"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="25dp"
+                app:icon="@drawable/galka_caller_details_edit"
+                app:iconGravity="textStart"
+                app:iconSize="10dp"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_phone_btn_caller_details_edit"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="110dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Добавить номер"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:theme="@style/MyButton"
+            app:backgroundTint="@color/toolbar_background"
+            app:cornerRadius="25dp"
+            app:icon="@drawable/plus_number_btn_caller_details_edit"
+            app:iconSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

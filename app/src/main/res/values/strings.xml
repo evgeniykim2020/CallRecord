@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">CallRecord</string>
+    <string name="journal">Журнал</string>
+    <string name="contacts">Контакты</string>
+    <string name="blocking">Блокировать</string>
+    <string name="settings">Настройки</string>
+    <string name="premium">Премиум</string>
+    <string name="allcalls">Все вызовы</string>
+    <string name="checkall">Выбрать все</string>
+    <string name="search">Поиск</string>
+
+    <string name="permission_required">Разрешения требуются для корректной работы приложения!</string>
+    <string name="ok">OK</string>
+    <string name="permission_granted">Разрешения получены. Вы можете пользоваться приложением!</string>
+
+    <string name="accessibility_service_description">accessibility_service_description</string>
+
+
+    <string name="enable_call_record">Enable Call Record</string>
+    <string name="no_permission">Permission is not granted. (are you installed as system app?)</string>
+    <string name="no_accessservice">Accessibility Service not enabled in Settings</string>
+    <string name="record_now">Record Now</string>
+    <string name="record_begin">Record begin</string>
+    <string name="record_end">Recording saved</string>
+    <string name="record_busy">Recorder is busy, maybe another record is running?</string>
+    <string name="notification_channel">Audio Recording</string>
+    <string name="notification_ongoing">Recording in progress</string>
+    <string name="notification_action_stop">Stop</string>
+    <string name="notification_action_delete">Delete</string>
+    <string name="Cancel_check_all">Отменить</string>
+
+    <string name="bottom_text_premium">Купите премиум версию всего за 120 руб. в месяц.
+\nЕсли вы хотите отменить подписку, выполните следующие действия:
+\n1. Откройте Google Play.
+\n2. В правом верхнем углу нажмите на значек профиля.
+\n3. Нажмите «Платежи и подписки», а затем «Подписки».
+\n4. Найдите подписку, которую нужно отменить.
+\n5. Нажмите «Отменить подписку».
+\n6. Следуйте инструкциям.</string>
+
+</resources>

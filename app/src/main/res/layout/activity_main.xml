@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/frag_container"
+    tools:context=".MainActivity">
+
+
+    <fragment
+        android:id="@+id/nav_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultNavHost="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_navigation_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        android:background="@color/grey"-->
+<!--        android:elevation="0dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        app:itemTextColor="@drawable/bottom_navigation_colors"-->
+<!--        app:itemIconTint="@drawable/bottom_navigation_item_colors"-->
+<!--        app:menu="@menu/bottom_nav">-->
+
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/light_grey"
+        android:layout_gravity="bottom"
+        android:elevation="3dp">
+        
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/journal_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:theme="@style/MyButton"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/upper_buttons"
+            app:iconSize="12dp"
+            app:icon="@drawable/phone2"
+            app:iconTint="@color/black"
+            android:text="Журнал"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textAllCaps="false"
+            app:iconGravity="textTop"
+            android:layout_weight="1"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="1dp"
+            android:onClick="onClick"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/contacts_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:theme="@style/MyButton"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/upper_buttons"
+            app:icon="@drawable/contacts2"
+            app:iconSize="12dp"
+            app:iconTint="@color/black"
+            android:text="Контакты"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textAllCaps="false"
+            app:iconGravity="textTop"
+            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
+            android:onClick="onClick"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/blocking_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:theme="@style/MyButton"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/upper_buttons"
+            app:icon="@drawable/block2"
+            app:iconSize="12dp"
+            app:iconTint="@color/black"
+            android:text="Блокировать"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textAllCaps="false"
+            app:iconGravity="textTop"
+            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
+            android:onClick="onClick"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:theme="@style/MyButton"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/upper_buttons"
+            app:icon="@drawable/settings2"
+            app:iconSize="12dp"
+            app:iconTint="@color/black"
+            android:text="Настройки"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textAllCaps="false"
+            app:iconGravity="textTop"
+            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
+            android:onClick="onClick"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/premium_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:theme="@style/MyButton"
+            app:cornerRadius="25dp"
+            android:backgroundTint="@color/upper_buttons"
+            app:icon="@drawable/premium2"
+            app:iconSize="12dp"
+            app:iconTint="@color/black"
+            android:text="Премиум"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textAllCaps="false"
+            app:iconGravity="textTop"
+            android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:onClick="onClick"/>
+
+
+    </LinearLayout>
+
+</FrameLayout>

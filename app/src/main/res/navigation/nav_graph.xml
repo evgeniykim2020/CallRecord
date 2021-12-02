@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/journal">
+
+    <fragment
+        android:id="@+id/journal"
+        android:name="com.evgeniykim.callrecord.fragments.Journal"
+        android:label="fragment_journal"
+        tools:layout="@layout/fragment_journal" />
+    <fragment
+        android:id="@+id/contacts"
+        android:name="com.evgeniykim.callrecord.fragments.Contacts"
+        android:label="fragment_contacts"
+        tools:layout="@layout/fragment_contacts" />
+    <fragment
+        android:id="@+id/blocking2"
+        android:name="com.evgeniykim.callrecord.fragments.Blocking"
+        android:label="fragment_blocking"
+        tools:layout="@layout/fragment_blocking" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.evgeniykim.callrecord.fragments.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/premium"
+        android:name="com.evgeniykim.callrecord.fragments.Premium"
+        android:label="fragment_premium"
+        tools:layout="@layout/fragment_premium" />
+</navigation>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/MyButton"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="15dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_day_caller_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="ВЧЕРА"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="19sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon_caller_details_items"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/profile_icon"
+            android:src="@drawable/ic_baseline_person_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_day_caller_details_items"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/name_caller_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Имя"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/icon_caller_details_items"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="30dp"/>
+
+        <TextView
+            android:id="@+id/second_name_caller_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Фаимилия"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/name_caller_details_items"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="30dp"/>
+
+        <ImageView
+            android:id="@+id/calling_img_caller_details_items"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:src="@drawable/arrow_outgoing"
+            app:layout_constraintStart_toEndOf="@+id/icon_caller_details_items"
+            app:layout_constraintTop_toBottomOf="@+id/name_caller_details_items"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/phone_type_caller_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Мобильный"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/roboto"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/name_caller_details_items"
+            app:layout_constraintStart_toEndOf="@+id/calling_img_caller_details_items"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/at_caller_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="в"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/roboto"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/name_caller_details_items"
+            app:layout_constraintStart_toEndOf="@+id/phone_type_caller_details_items"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:id="@+id/call_time_details_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="17:04"
+            android:textColor="@color/dark_blue"
+            android:fontFamily="@font/roboto"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/name_caller_details_items"
+            app:layout_constraintStart_toEndOf="@+id/at_caller_details_items"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/call_btn_caller_details_items"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_phone"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <ImageView
+            android:id="@+id/play_btn_caller_details_items"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/call_btn_caller_details_items"
+            android:src="@drawable/ic_play"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
