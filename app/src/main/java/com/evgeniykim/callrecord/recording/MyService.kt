@@ -122,10 +122,7 @@ class MyService: AccessibilityService() {
         recorder?.release()
         recorder = null
         Log.i(TAG, "Recording stopped")
-
     }
-
-
 }
 
 

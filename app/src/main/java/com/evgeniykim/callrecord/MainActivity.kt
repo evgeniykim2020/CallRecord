@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.evgeniykim.callrecord.fragments.*
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,9 +32,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun setFragment(fragment: Fragment){
-        val frag = supportFragmentManager.beginTransaction()
-        frag.replace(R.id.frag_container, fragment)
-        frag.commit()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                val frag = supportFragmentManager.beginTransaction()
+                frag.replace(R.id.frag_container, fragment)
+                frag.commit()
+            }
+        }
+
     }
 
     private fun checkPermission() {
@@ -94,9 +103,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToAccessibilityService(){
-        val intent = Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                val intent = Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+
     }
 
     override fun onClick(view: View?) {
@@ -132,20 +146,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setButtonsChars(button: MaterialButton, button2: MaterialButton, button3: MaterialButton, button4: MaterialButton, button5: MaterialButton) {
-        button.background.setTint(resources.getColor(R.color.grey))
-        button.setTextColor(resources.getColor(R.color.white))
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                button.background.setTint(resources.getColor(R.color.grey))
+                button.setTextColor(resources.getColor(R.color.white))
 
-        button2.background.setTint(resources.getColor(R.color.upper_buttons))
-        button2.setTextColor(resources.getColor(R.color.black))
+                button2.background.setTint(resources.getColor(R.color.upper_buttons))
+                button2.setTextColor(resources.getColor(R.color.black))
 
-        button3.background.setTint(resources.getColor(R.color.upper_buttons))
-        button3.setTextColor(resources.getColor(R.color.black))
+                button3.background.setTint(resources.getColor(R.color.upper_buttons))
+                button3.setTextColor(resources.getColor(R.color.black))
 
-        button4.background.setTint(resources.getColor(R.color.upper_buttons))
-        button4.setTextColor(resources.getColor(R.color.black))
+                button4.background.setTint(resources.getColor(R.color.upper_buttons))
+                button4.setTextColor(resources.getColor(R.color.black))
 
-        button5.background.setTint(resources.getColor(R.color.upper_buttons))
-        button5.setTextColor(resources.getColor(R.color.black))
+                button5.background.setTint(resources.getColor(R.color.upper_buttons))
+                button5.setTextColor(resources.getColor(R.color.black))
+            }
+        }
     }
 
 

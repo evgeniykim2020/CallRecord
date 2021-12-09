@@ -1,5 +1,6 @@
 package com.evgeniykim.callrecord.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.CallLog
 import android.util.Log
@@ -18,10 +19,10 @@ class SearchContact: AdapterListener {
 
     var calls = ArrayList<JournalModels>()
     var matchedCalls = ArrayList<JournalModels>()
-    var callsAdapter = JournalAdapter(calls, this)
+    val diffCallback = DiffCallback()
+    var callsAdapter = JournalAdapter(diffCallback, this)
 
-
-
+    @SuppressLint("Range")
     fun searchContact(context: Context, recyclerView: RecyclerView, searchView: SearchView) {
         val cursor = context.contentResolver?.query(
             CallLog.Calls.CONTENT_URI,null, null, null,
@@ -36,74 +37,33 @@ class SearchContact: AdapterListener {
                 val callType = cursor.getString(cursor.getColumnIndex(CallLog.Calls.TYPE))
 
                 val callTypeInt = Integer.parseInt(callType)
-//                audioFile = context?.assets?.openFd("app_src_main_assets_jazz_in_paris.mp3")
                 var calling_type: String? = null
-                var missingRec: Int? = null
-                var arrowSignCalls: Int? = null
-                var missingCalltext: String? = null
-                var missing: String? = null
-                var incoming: String? = null
-                var outgoing: String? = null
-                var isMissingOutgoing = false
-                var isMissingIncoming = false
 
                 var findAudio = FindAudio()
 
                 when (callTypeInt) {
                     CallLog.Calls.OUTGOING_TYPE -> {
-//                        outgoing = OUTGOING_CALL
                         calling_type = Constants.OUTGOING_CALL
                         Log.e(Journal.TAG, "Call Type OUT: $callType")
-//                        isOutgoing = true
                     }
                     CallLog.Calls.INCOMING_TYPE -> {
-//                        incoming = Constants.INCOMING_CALL
                         calling_type = Constants.INCOMING_CALL
                         Log.e(Journal.TAG, "Call Type IN: $callType")
-//                        isIncoming = true
 
                     }
                     CallLog.Calls.MISSED_TYPE -> {
-//                        missing = MISSING_CALL
                         calling_type = Constants.MISSING_CALL
                         Log.e(Journal.TAG, "Call Type MISS: $callType")
-//                        isMissing = true
                     }
                 }
 
-//                if (incomingCallsClicked) {
-//                    calling_type = Constants.INCOMING_CALL
-//                    incomingCallsClicked = false
-//                    callHistory.add(JournalModels(name, convertTime(time), number, convertDate(date),
-//                        findSimilarDates(date), calling_type))
-//                }
-//
-//                if (outgoingCallsClicked) {
-//                    calling_type = Constants.OUTGOING_CALL
-//                    outgoingCallsClicked = false
-//                    callHistory.add(JournalModels(name, convertTime(time), number, convertDate(date),
-//                        findSimilarDates(date), calling_type))
-//                }
-//
-//                if (missingCallsClicked) {
-//                    calling_type = Constants.MISSING_CALL
-//                    missingCallsClicked = false
-//                    callHistory.add(JournalModels(name, convertTime(time), number, convertDate(date),
-//                        findSimilarDates(date), calling_type))
-//                }
-
-//                else {
-//
-//                    callHistory.add(JournalModels(name, convertTime(time), number, convertDate(date), findAudio!!.findRecord(date, requireContext()), calling_type))
-//
-//                }
                 var isCheckAll = 0
 
                 GlobalScope.launch {
-                    calls.add(JournalModels(name, convertTime(time), number, convertDate(date), findAudio.findRecord(date, context), calling_type))
+                    calls.add(JournalModels(name, convertTime(time), number, convertDate(date), findAudio.findRecord(date, context.contentResolver), calling_type))
                 }
 
-                callsAdapter = JournalAdapter(calls, this).also {
+                callsAdapter = JournalAdapter(diffCallback, this).also {
                     recyclerView.adapter = it
                     it.notifyDataSetChanged()
                 }

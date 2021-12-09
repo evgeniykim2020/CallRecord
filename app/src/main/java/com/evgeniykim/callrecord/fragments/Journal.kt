@@ -1,6 +1,6 @@
 package com.evgeniykim.callrecord.fragments
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.CallLog
@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.evgeniykim.callrecord.R
 import com.evgeniykim.callrecord.adapters.AdapterListener
 import com.evgeniykim.callrecord.adapters.JournalAdapter
@@ -24,22 +24,20 @@ import com.evgeniykim.callrecord.listeners.OnCallListener
 import com.evgeniykim.callrecord.listeners.Utility
 import com.evgeniykim.callrecord.models.JournalModels
 import com.evgeniykim.callrecord.utils.*
+import com.evgeniykim.callrecord.viewmodels.JournalViewModel
 import kotlinx.android.synthetic.main.fragment_journal.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
+import java.util.*
 
-class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
+class Journal(): Fragment(), OnCallListener<JournalModels>, AdapterListener {
 
-    private var adapter: JournalAdapter? = null
-    private lateinit var RV: RecyclerView
+    private lateinit var adapter: JournalAdapter
+//    private lateinit var RV: RecyclerView
     private var filterClicked = false
-    private var callsList = ArrayList<JournalModels>()
-    private var incomingCallsClicked = false
-    private var missingCallsClicked = false
-    private var outgoingCallsClicked = false
+    private var callsList = mutableListOf<JournalModels>()
     private var findAudio: FindAudio? = null
     private var searchContact: SearchContact? = null
     private var allChecked = false
@@ -48,43 +46,63 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
     private var filterOutgoing = false
     private var filterMissing = false
     private var filterAllCalls = false
-    private lateinit var requireContext: Context
+//    private lateinit var requireContext: Context
     private var waveform: Waveform? = null
+    private val columns = arrayOf(
+            CallLog.Calls.CACHED_NAME,
+            CallLog.Calls.NUMBER,
+            CallLog.Calls.DATE,
+            CallLog.Calls.DURATION,
+            CallLog.Calls.TYPE
+    )
+    private var PB: ProgressBar? = null
 
     companion object{
         const val TAG = "CALL_RECORD"
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentJournalBinding.inflate(inflater, container, false)
+    /**
+     * viewModel injected by Koin in App and AppModule
+     */
+    private val viewModel by viewModel<JournalViewModel>()
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val binding = FragmentJournalBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).setSupportActionBar(journal_toolbar)
-        RV = binding.recyclerJournal
-        RV.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        requireContext = requireContext()
-        binding.progressBar.visibility = View.GONE
+//        RV = binding.recyclerJournal
+//        RV.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+//        RV.adapter = adapter
+//        requireContext = requireContext()
+//        PB = binding.progressBar
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = JournalAdapter(callsList, this)
-        adapter?.setCallListener(this)
-        RV.adapter = adapter
+        //        adapter = JournalAdapter(callsList, this)
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            delay(1000)
-//            showHistory()
-//            adapter.notifyDataSetChanged()
-//        }
+        /**
+         * MVVM initialization
+         */
+        val diffCallback = DiffCallback()
+        val adapter = JournalAdapter(diffCallback, this)
+        recyclerJournal.layoutManager = LinearLayoutManager(context)
+        recyclerJournal.adapter = adapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.loadCallsHistory().collectLatest { pagingData ->
+                adapter.submitData(pagingData)
+            }
 
-//        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main){
-//            delay(1000)
-//            getHistory()
-//            adapter.notifyDataSetChanged()
-//        }
-        doJournalView()
+        }
+
+//        adapter = JournalAdapter(callsList, this)
+//        adapter?.setCallListener(this)
+//        RV.adapter = adapter
+//
+//        showHistory()
+
         /**
          * filter
          */
@@ -103,16 +121,6 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
 
         showDialer()
         hideDialer()
-    }
-
-    private fun doJournalView(){
-        lifecycleScope.launch {
-            delay(500)
-            withContext(Dispatchers.Default) {
-                showHistory()
-            }
-
-        }
     }
 
     private fun showDialer() {
@@ -213,7 +221,7 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
             allCalls.visibility = View.GONE
             checkAll.visibility = View.GONE
             searchIsClicked = true
-            searchContact!!.searchContact(requireContext(), RV, search)
+            searchContact!!.searchContact(requireContext(), recyclerJournal, search)
         }
 
     }
@@ -258,7 +266,6 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
             allCalls.text = "Входящие"
 
             Log.e(TAG, "Sorting incoming clicked")
-            incomingCallsClicked = true
             incoming_calls_txt.setTextColor(resources.getColor(R.color.toolbar_background))
             radio_incoming.setImageDrawable(resources.getDrawable(R.drawable.galka_drop_down))
 
@@ -282,7 +289,6 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
         // Outgoing filter
         linear3.setOnClickListener {
 
-            outgoingCallsClicked = true
             outcoming_calls_txt.setTextColor(resources.getColor(R.color.toolbar_background))
             radio_outcoming.setImageDrawable(resources.getDrawable(R.drawable.galka_drop_down))
 
@@ -312,7 +318,6 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
         // Missing filter
         linear4.setOnClickListener {
             Log.e(TAG, "Sorting missing clicked")
-            missingCallsClicked = true
             missed_calls_txt.setTextColor(resources.getColor(R.color.toolbar_background))
             radio_missed.setImageDrawable(resources.getDrawable(R.drawable.galka_drop_down))
 
@@ -354,35 +359,38 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
         }
     }
 
-    private suspend fun showHistory() {
-        adapter = JournalAdapter(getHistory(), this)
-//        adapter?.setCallListener(this)
+//    private fun showHistory() {
+//        adapter = JournalAdapter(getHistory(), this)
+////        adapter?.setCallListener(this)
 //        RV.adapter = adapter
-//        adapter.notifyDataSetChanged()
-    }
+////        adapter.notifyDataSetChanged()
+//    }
 
     /**
      * Method to form RV and adapter
      */
-    private suspend fun getHistory(): ArrayList<JournalModels>{
-        val callHistory = ArrayList<JournalModels>()
-        val cursor = context?.contentResolver?.query(CallLog.Calls.CONTENT_URI,null, null, null, CallLog.Calls.DATE + " DESC")
+    @SuppressLint("Range")
+    private fun getHistory(): MutableList<JournalModels>{
+        val callHistory = mutableListOf<JournalModels>()
+        val cursor = context?.contentResolver?.query(CallLog.Calls.CONTENT_URI, columns, null, null, CallLog.Calls.DEFAULT_SORT_ORDER)
+        //TODO this is how was done in sample: CallLog.Calls.DATE + " DESC"
 
         if (cursor!!.count > 0) {
             while (cursor.moveToNext()) {
                 val number = cursor.getString(cursor.getColumnIndex(CallLog.Calls.NUMBER))
                 var name = cursor.getString(cursor.getColumnIndex(CallLog.Calls.CACHED_NAME))
+                if (name == null) { name = number }
                 val date = cursor.getLong(cursor.getColumnIndex(CallLog.Calls.DATE))
+                val timeStr = SimpleDateFormat("HH:mm").format(Date(date))
+                val dateStr = SimpleDateFormat("dd-MM-yyyy").format(Date(date))
                 val callType = cursor.getString(cursor.getColumnIndex(CallLog.Calls.TYPE))
+
 
                 val callTypeInt = Integer.parseInt(callType)
                 var calling_type: String? = null
 
                 findAudio = FindAudio()
-                val audioRecord = findAudio?.findRecord(date, requireContext)
-
-                val dateStr = convertDate(date)
-                val timeStr = convertTime(date)
+                val audioRecord = context?.contentResolver?.let { findAudio?.findRecord(date, it) }
 
                 when (callTypeInt) {
                     CallLog.Calls.OUTGOING_TYPE -> {
@@ -400,28 +408,19 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
                     }
                 }
 
-                if (name == null) { name = number }
-
                 /**
                  * Метод выдачи СЕГОДНЯ/ВЧЕРА
                  */
                 var day = ""
                 val showDay = CompareTodayYesterday()
                 if (showDay.isToday(date)) { day = "Сегодня" }
-                else if (showDay.isYesterday(date)) { day = "Вчера" } else { day = convertDate(date) }
+                else if (showDay.isYesterday(date)) { day = "Вчера" } else { day = dateStr }
 
-//                callHistory.add(JournalModels(name , convertTime(date), number, day, audioRecord, calling_type))
+                callHistory.add(JournalModels(name , timeStr, number, day, audioRecord, calling_type))
 
-                callsList.add(JournalModels(name , timeStr, number, day, audioRecord, calling_type))
-
-//                if (!RV.isComputingLayout && RV.scrollState == SCROLL_STATE_IDLE) {
-//                    adapter.notifyDataSetChanged()
-//                }
-
-                withContext(Dispatchers.Main) {
-                    if (!RV.isComputingLayout && RV.scrollState == SCROLL_STATE_IDLE) {
-                        adapter?.notifyDataSetChanged()
-                    }
+                if (!recyclerJournal.isComputingLayout && recyclerJournal.scrollState == SCROLL_STATE_IDLE) {
+                    adapter?.notifyDataSetChanged()
+                    PB?.visibility = View.GONE
                 }
             }
 
@@ -432,26 +431,9 @@ class Journal: Fragment(), OnCallListener<JournalModels>, AdapterListener {
         return callHistory
     }
 
-    private fun convertTime(date: Long): String {
-        val formater = SimpleDateFormat("HH:mm")
-        val formatted: String = formater.format(date)
-        return formatted
-    }
-
-    private fun convertDate(date: Long): String {
-        val formater = SimpleDateFormat("dd-MM-yyyy")
-        val formatted: String = formater.format(date)
-        return formatted
-    }
-
     override fun onCall(journal: JournalModels) {
         Utility.makeCall(requireContext(), journal.phoneNum)
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        doJournalView()
-//    }
 
     override fun onPause() {
         super.onPause()

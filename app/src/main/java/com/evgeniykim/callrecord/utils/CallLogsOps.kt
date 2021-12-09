@@ -1,5 +1,6 @@
 package com.evgeniykim.callrecord.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.CallLog
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class CallLogsOps() {
     var calls = ArrayList<CallerDetailsModel>()
     var callsAdapter = CallerDetailsAdapter(calls)
 
+    @SuppressLint("Range")
     fun getCallLogData(context: Context, recyclerView: RecyclerView, pNumber: String){
 
         val cursor = context.contentResolver.query(
@@ -30,17 +32,14 @@ class CallLogsOps() {
 
                 if (pNumber == number) {
                     GlobalScope.launch {
-                        calls.add(CallerDetailsModel(name, name2, convertTime(dateLong), number, convertDate(dateLong), findAudio.findRecord(dateLong, context), null))
+                        calls.add(CallerDetailsModel(name, name2, convertTime(dateLong), number, convertDate(dateLong), findAudio.findRecord(dateLong, context.contentResolver), null))
                     }
                     callsAdapter = CallerDetailsAdapter(calls).also {
                         recyclerView.adapter = it
                         recyclerView.adapter!!.notifyDataSetChanged()
                     }
                 }
-
-
             }
-
         }
     }
 

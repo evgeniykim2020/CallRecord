@@ -1,8 +1,8 @@
 package com.evgeniykim.callrecord.utils
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.ContentUris
-import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.net.Uri
 import android.provider.MediaStore
@@ -10,9 +10,10 @@ import java.text.SimpleDateFormat
 
 class FindAudio {
 
-    fun findRecord(date: Long, context: Context): AssetFileDescriptor? {
+    @SuppressLint("Range")
+    fun findRecord(date: Long, contentResolver: ContentResolver): AssetFileDescriptor? {
         var afd: AssetFileDescriptor? = null
-        val cursor2 = context.contentResolver?.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null)
+        val cursor2 = contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null, null)
 
         if (cursor2!!.count > 0) {
             while (cursor2.moveToNext()) {
@@ -22,7 +23,7 @@ class FindAudio {
                 if (audioName == "${dateStamp(date)}.m4a") {
                     val contentUri: Uri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, audioId)
 
-                    val cr: ContentResolver = context.contentResolver
+                    val cr: ContentResolver = contentResolver
                     afd = cr.openAssetFileDescriptor(contentUri, "r")
                 }
             }
